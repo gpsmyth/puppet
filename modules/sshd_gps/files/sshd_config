@@ -1,0 +1,57 @@
+#
+#                     WARNING
+#       This file is managed by Puppet ssh module.
+#   Any changes to this file will be over-written.
+#  puppet agent --configprint modulepath is useful here to find sshd.pp
+#  which in trun references this files location in modules part
+#
+# Part of class sshd_gps
+#
+
+Port 22
+Protocol 2
+
+HostKey /etc/ssh/ssh_host_key
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_dsa_key
+
+SyslogFacility AUTH
+LogLevel INFO
+
+LoginGraceTime 120
+PermitRootLogin no
+StrictModes yes
+RSAAuthentication yes
+IgnoreRhosts yes
+RhostsRSAAuthentication no
+HostbasedAuthentication no
+IgnoreUserKnownHosts yes
+PermitEmptyPasswords no
+X11Forwarding yes
+PrintMotd yes
+PrintLastLog yes
+KeepAlive yes
+UseLogin no
+UsePrivilegeSeparation yes
+Compression no
+Subsystem       sftp    /usr/libexec/openssh/sftp-server
+
+ChallengeResponseAuthentication yes
+GSSAPIAuthentication yes
+GSSAPICleanupCredentials yes
+KerberosAuthentication no
+PasswordAuthentication no
+
+UsePAM yes
+
+## Keeps SCM checks happy
+KeyRegenerationInterval 3600
+MaxAuthTries 5
+MaxStartups 10
+PermitUserEnvironment no
+PubkeyAuthentication yes
+TCPKeepAlive yes
+
+## Only listen on IPv4 (and disables listening on IPv6)
+AddressFamily inet
+
